@@ -5,6 +5,7 @@
         "baseUrl": "src",      
     },
     "exclude": [
+        "tests",
         "**/*.spec.ts",
         "**/*.test.ts",
         "src/usercases/test/"
