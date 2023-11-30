@@ -6,6 +6,7 @@ import { Topics } from "@/infra/adapter/kafka/topics/topics"
 import { Validation } from "@/application/contracts/validation"
 import { ValidatorComposite } from "@/validation/validator/validator-composite"
 import { RequiredFieldValidator } from "@/validation/validator/required-field-validator"
+import delay from "delay"
 
 export class RunJobAssestmentController extends BrokerMessageController {
   constructor (
@@ -17,9 +18,11 @@ export class RunJobAssestmentController extends BrokerMessageController {
   async perform(request: CompletedTaskModel): EventBrokerController.Result {
     const result = await this.guard(request)
     if (!result) {
-      setTimeout(async () => await (await this.brokerMessage).send({topic: Topics.IJobCompletedApproved, message: JSON.stringify({ taskId: request.task_id, typetask: request.type_task, path: request.path})}), 5000);
+      delay(1000)
+      await (await this.brokerMessage).send({topic: Topics.IJobCompletedApproved, message: JSON.stringify({ taskId: request.task_id, typetask: request.type_task, path: request.path})})
     } else {
-      setTimeout(async () => await (await this.brokerMessage).send({topic: Topics.IJobCompletedReproved, message: JSON.stringify({ taskId: request.task_id, typetask: request.type_task, path: request.path, reproved_reason: result.message})}), 5000)
+      delay(1000)
+      await (await this.brokerMessage).send({topic: Topics.IJobCompletedReproved, message: JSON.stringify({ taskId: request.task_id, typetask: request.type_task, path: request.path, reproved_reason: result.message})})
     }
     return null
   }
