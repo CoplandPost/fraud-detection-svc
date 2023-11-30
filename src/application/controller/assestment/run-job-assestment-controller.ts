@@ -17,9 +17,9 @@ export class RunJobAssestmentController extends BrokerMessageController {
   async perform(request: CompletedTaskModel): EventBrokerController.Result {
     const result = await this.guard(request)
     if (!result) {
-      await (await this.brokerMessage).send({topic: Topics.IJobCompletedApproved, message: JSON.stringify({ taskId: request.task_id, typetask: request.type_task, path: request.path})})
+      setTimeout(async () => await (await this.brokerMessage).send({topic: Topics.IJobCompletedApproved, message: JSON.stringify({ taskId: request.task_id, typetask: request.type_task, path: request.path})}), 5000);
     } else {
-      await (await this.brokerMessage).send({topic: Topics.IJobCompletedReproved, message: JSON.stringify({ taskId: request.task_id, typetask: request.type_task, path: request.path, reproved_reason: result.message})})
+      setTimeout(async () => await (await this.brokerMessage).send({topic: Topics.IJobCompletedReproved, message: JSON.stringify({ taskId: request.task_id, typetask: request.type_task, path: request.path, reproved_reason: result.message})}), 5000)
     }
     return null
   }
