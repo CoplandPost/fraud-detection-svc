@@ -1,20 +1,34 @@
 version: '3.0'
 services:
-  SVCAP27:
-    container_name: svcap27-container
+  SVCDB31:
+    container_name: svcdb31-container
+    image: mongo:4
     restart: always
-    image: node:19
+    networks:
+      - net-coplandpost
+    volumes:
+      - ./data-storage:/data/db
+    ports:
+      - "27031:27017"
+
+  FRAUD:
+    container_name: fraud-container
+    restart: always
+    image: node:16
     working_dir: /usr/src/app
     command: bash -c "npx nodemon main/server.js"
     environment:
-      - HTTP_PORT=5087
+      - MONGO_URI=SVCDB31
+      - HTTP_PORT=5092
     networks:
       - net-coplandpost
     volumes: 
       - ./dist:/usr/src/app
       - ./package.json:/usr/src/app/package.json
     ports: 
-      - "5087:5087"
+      - "5092:5092"
+    links:
+      - SVCDB31
 
 networks:
   net-coplandpost:

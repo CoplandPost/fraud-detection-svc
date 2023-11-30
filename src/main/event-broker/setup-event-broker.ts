@@ -3,6 +3,7 @@ import { messageCallBackAdapter } from '@/infra/adapter/kafka/message-callback-a
 import { Topics } from '@/infra/adapter/kafka/topics/topics'
 import dev from '../config/dev'
 import { BrokerEventControllersDecoratorFactory } from '../factory/controller-decorator-factory'
+import { runAssestmentControllerFactory } from '../factory/run-assestment-controller-factory'
 
 
 export const setupBrokerEvents = async (): Promise<void> => {
@@ -21,7 +22,7 @@ export const setupBrokerEvents = async (): Promise<void> => {
 const eventTriggers = [
   {
     topic: Topics.IProviderCompletedTask,
-    callback: messageCallBackAdapter(BrokerEventControllersDecoratorFactory(Topics.IProviderCompletedTask, () => {}))
+    callback: messageCallBackAdapter(BrokerEventControllersDecoratorFactory(Topics.IProviderCompletedTask, runAssestmentControllerFactory()))
   },
   
 ]

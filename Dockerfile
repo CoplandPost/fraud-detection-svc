@@ -20,9 +20,9 @@ RUN cd dist && npm install --prod --legacy-peer-deps && \
 
 RUN npm install pm2 -g  
 ENV PARTNER_SERVICE=http://customer-manager-clusterip-svc:5076/api
-ENV MONGO_URI=10.0.1.178:27028
-ENV HTTP_PORT=5087
+ENV MONGO_URI=10.0.1.178:27041
+ENV HTTP_PORT=5092
 ENV TZ=Europe/London
 ENV HTTP_LOGIN_API=http://app.coplandpost.com/api/login
-EXPOSE 5087
+EXPOSE 5092
 CMD pm2-runtime /usr/src/app/process.yml

@@ -18,6 +18,11 @@ describe('Time Used', () => {
     sut = new TimeUsed(moment, 'started_datetime_formatted', 'completed_datetime', 10)
   })
 
+  it('should setAllowedTime', async () => {
+    sut.setAllowedTime(20)
+    expect(sut).toMatchObject({allowedTime: 20})
+  })
+
   it('should return missing param error if not find started_datetime_formatted', async () => {
     const error = await sut.validate({completed_datetime: ''})
 

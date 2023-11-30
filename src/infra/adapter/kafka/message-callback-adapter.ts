@@ -16,5 +16,5 @@ export const messageCallBackAdapter = (controller: BrokerMessageController): any
     } catch {
       body = value
     }
-    await controller.handle({ body })
+    await controller.handle(body)
   }

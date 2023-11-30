@@ -13,6 +13,7 @@ export class CompletedTaskModel {
 }
 
 export class CompletedTaskModelEntity extends CompletedTaskModel {
+  id: string
   created_at: string
 }
 

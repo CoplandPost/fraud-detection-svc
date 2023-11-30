@@ -18,14 +18,16 @@ export abstract class BrokerMessageController implements EventBrokerController {
   async handle (request: EventBrokerMessage): EventBrokerController.Result {
     try {
       const error = await this.buildValidator().validate(request)
-      if (error) return badRequestBrokerMessage(error) 
+      console.log(error)
+      if (error) throw error 
       const performResponse = await this.perform(request)
       if (performResponse?.error !== undefined) {
         const error = performResponse?.error as string
+        throw error
       }
       return performResponse as any
     } catch (error) {
-      return serverErrorBrokerMessage(error) as any
+       throw error
     }
   }
 
