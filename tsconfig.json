@@ -1,0 +1,24 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist",
+        "module": "commonjs",
+        "target": "es2019",
+        "esModuleInterop": true,
+        "sourceMap": true,
+        "rootDir": "/",
+        "baseUrl": "src",
+        "paths": {
+            "@/*": [
+                "*"
+            ]
+        }        
+    },
+    "strict": true,
+    "include": [
+        "tests",
+        "src",
+        "src/presentation/erros/.ts"
+, "jest-mongodb-config.js", "tests/features/webhook-tookan-controller.spec.ts"    ],
+    "exclude": [
+    ]
+}

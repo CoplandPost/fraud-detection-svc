@@ -1,0 +1,22 @@
+version: '3.0'
+services:
+  SVCAP27:
+    container_name: svcap27-container
+    restart: always
+    image: node:19
+    working_dir: /usr/src/app
+    command: bash -c "npx nodemon main/server.js"
+    environment:
+      - HTTP_PORT=5087
+    networks:
+      - net-coplandpost
+    volumes: 
+      - ./dist:/usr/src/app
+      - ./package.json:/usr/src/app/package.json
+    ports: 
+      - "5087:5087"
+
+networks:
+  net-coplandpost:
+    external:
+      name: coplandpost-network
