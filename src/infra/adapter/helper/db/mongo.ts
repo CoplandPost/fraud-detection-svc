@@ -6,7 +6,7 @@ export const mongoHelper = {
   isConnected: false,
   async connect () {
     try {
-      this.connection = await MongoClient.connect(dev.MONGO_URI !== '127.0.0.1' ? `mongodb://${dev.MONGO_URI}/tasks` : global.__MONGO_URI__)
+      this.connection = await MongoClient.connect(dev.MONGO_URI !== '127.0.0.1' ? `mongodb://${dev.MONGO_URI}/assestment` : global.__MONGO_URI__)
       this.isConnected = true
     } catch (err) {
       console.log(err)
